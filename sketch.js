@@ -9,7 +9,7 @@ var planets;
 var translateLeft, translateRight;
 
 function setup() {
-  createCanvas(800, 600);
+  createCanvas(1200, 600);
   
   // ship = new Ship();
   
