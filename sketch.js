@@ -41,7 +41,7 @@ function draw() {
   
   translate(translateLeft, translateRight);
   
-  if (keyIsDown(87)) {
+  if (keyIsDown(87) || touchIsDown) {
     if (starSpeed < 21) {
       starSpeed += .5;
     } 
