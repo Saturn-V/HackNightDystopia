@@ -1,24 +1,25 @@
-var stars, starSpeed;
+var stars, Speed;
 // var ship;
 
 /* images */
-var planetOne, planetTwo, bg;
+var planetImg_01, planetImg_02, backgroundImg;
 
 var planets;
 
+/* Set view window for correct effect */
 var translateLeft, translateRight;
 
 function setup() {
   createCanvas(1200, 600);
   
-  // ship = new Ship();
-  
+  //Create some Stars
   stars = [];
   for (var i = 0; i < 800; i++) {
     stars[i] = new Star();
   }
   
-  starSpeed = 7;
+  //set speed for objects in space
+  Speed = 7;
   
   translateLeft = width / 2;
   translateRight = height / 2;
@@ -30,6 +31,19 @@ function setup() {
 
 function draw() {
   background(0);
+  translate(translateLeft, translateRight);
+  
+  if (keyIsDown(87) || touchIsDown) {
+    if (Speed < 21) {
+      Speed += .5;
+    } 
+  } else {
+    if(Speed < 1) {
+      Speed = 7;
+    } else {
+      Speed--;
+    }
+  }
   
   if(keyIsDown(65)) {
     translateLeft = width / 4;
@@ -39,54 +53,11 @@ function draw() {
     translateLeft = width / 2;
   }
   
-  translate(translateLeft, translateRight);
-  
-  if (keyIsDown(87) || touchIsDown) {
-    if (starSpeed < 21) {
-      starSpeed += .5;
-    } 
-  } else {
-    if(starSpeed < 1) {
-      starSpeed = 7;
-    } else {
-      starSpeed--;
-    }
-  }
-  
   for (var i = 0; i < stars.length; i++) {
     stars[i].update();
     stars[i].show();
   }
-  
-  // ship.update();
-  // ship.show();
-}
 
-/* Create some STAAAARS */
-function Star() {
-  this.x = random(-width, width);
-  this.y = random(-height, height);
-  this.z = random(width);
-
-  this.update = function() {
-    this.z = this.z - starSpeed;
-    if(this.z < 1) {
-      this.z = width;
-      this.x = random(-width, width);
-      this.y = random(-height, height);
-    }
-  }
-
-  this.show = function() {
-    fill(255);
-    noStroke();
-
-    var sx = map(this.x / this.z, 0, 1, 0, width);
-    var sy = map(this.y / this.z, 0, 1, 0, height);
-
-    var r = map(this.z, 0, width, 16, 0);
-    ellipse(sx, sy, r, r);
-  }
 }
 
 //   this.show = function() {
